@@ -1,0 +1,25 @@
+# Node
+node_modules/
+dist/
+build/
+
+# Logs
+*.log
+
+# Env
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Java (backend)
+target/
+*.class
+
+# Misc
+coverage/
