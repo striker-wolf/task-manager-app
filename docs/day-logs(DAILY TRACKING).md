@@ -170,3 +170,34 @@
 
 ## Next
 - Replace Map with proper response wrapper class
+
+
+
+
+
+# Day 7 — API Response Wrapper + Generics
+
+## What I Did
+- Created generic ApiResponse<T> class
+- Replaced Map-based responses with ApiResponse
+- Refactored all controller endpoints (POST, GET, PUT, DELETE)
+- Implemented type-safe and consistent API responses
+
+## Problems
+- Confusion with generics (<T>)
+- Missed updating some endpoints initially
+- Return type mismatch errors
+
+## Fix
+- Updated all controller return types to ApiResponse<T>
+- Understood and applied generics correctly
+- Ensured consistent response structure across APIs
+
+## Learnings
+- Generics (<T>) for reusable and flexible design
+- Importance of type safety
+- Difference between raw Map vs structured response class
+- Clean and maintainable API design
+
+## Next
+- Introduce Mapper layer to remove manual DTO conversion

@@ -2,6 +2,7 @@ package com.chirag.taskmanager.controller;
 
 import com.chirag.taskmanager.dto.UserRequestDTO;
 import com.chirag.taskmanager.dto.UserResponseDTO;
+import com.chirag.taskmanager.payload.ApiResponse;
 
 import com.chirag.taskmanager.entity.User;
 import com.chirag.taskmanager.service.UserService;
@@ -23,74 +24,50 @@ public class UserController {
         this.userService = userService;
     }
 
+
+
+
     @PostMapping
-    public Map<String, Object> createUser(@Valid @RequestBody UserRequestDTO dto) {
+    public ApiResponse<UserResponseDTO> createUser(@Valid @RequestBody UserRequestDTO dto) {
 
         UserResponseDTO user = userService.createUser(dto);
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("timestamp", LocalDateTime.now());
-        response.put("status", 201);
-        response.put("message", "User created successfully");
-        response.put("data", user);
-
-        return response;
+        return new ApiResponse<>(201, "User created successfully", user);
     }
 
     @GetMapping
-    public Map<String, Object> getAllUsers() {
+    public ApiResponse<List<UserResponseDTO>> getUsers() {
 
         List<UserResponseDTO> users = userService.getAllUsers();
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("timestamp", LocalDateTime.now());
-        response.put("status", 200);
-        response.put("message", "Users fetched successfully");
-        response.put("data", users);
-
-        return response;
+        return new ApiResponse<>(200, "Users fetched successfully", users);
     }
 
+
     @GetMapping("/{id}")
-    public Map<String, Object> getUserById(@PathVariable Long id) {
+    public ApiResponse<UserResponseDTO> getUser(@PathVariable Long id) {
 
         UserResponseDTO user = userService.getUserById(id);
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("timestamp", LocalDateTime.now());
-        response.put("status", 200);
-        response.put("message", "User fetched successfully");
-        response.put("data", user);
-
-        return response;
+        return new ApiResponse<>(200, "User fetched successfully", user);
     }
 
     @PutMapping("/{id}")
-    public Map<String, Object> updateUser(@PathVariable Long id, @Valid @RequestBody UserRequestDTO dto) {
+    public ApiResponse<UserResponseDTO> updateUser(
+            @PathVariable Long id,
+            @Valid @RequestBody UserRequestDTO dto) {
 
         UserResponseDTO user = userService.updateUser(id, dto);
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("timestamp", LocalDateTime.now());
-        response.put("status", 200);
-        response.put("message", "User updated successfully");
-        response.put("data", user);
-
-        return response;
+        return new ApiResponse<>(200, "User updated successfully", user);
     }
 
     @DeleteMapping("/{id}")
-    public Map<String, Object> deleteUser(@PathVariable Long id) {
+    public ApiResponse<String> deleteUser(@PathVariable Long id) {
 
         userService.deleteUser(id);
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("timestamp", LocalDateTime.now());
-        response.put("status", 200);
-        response.put("message", "User deleted successfully");
-        response.put("data", null);
-
-        return response;
+        return new ApiResponse<>(200, "User deleted successfully", null);
     }
 
 }
