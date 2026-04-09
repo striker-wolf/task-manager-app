@@ -13,3 +13,9 @@
 
 ## Flow
 Controller → Service → Repository → DB
+
+
+
+
+## Flow
+Client → DTO → Controller → Service → Entity → Repository → DB

@@ -138,3 +138,35 @@
 
 ## Next
 - Introduce DTO layer
+
+
+
+
+
+# Day 6 — DTO Layer (Data Abstraction)
+
+## What I Did
+- Introduced DTO layer (UserRequestDTO, UserResponseDTO)
+- Refactored controller to use DTO instead of Entity
+- Updated service to convert DTO ↔ Entity
+- Implemented clean data flow across layers
+
+## Problems
+- DTO not integrated initially
+- Type mismatch errors (DTO vs Entity)
+- Missing imports (ArrayList)
+- Getter/Setter confusion
+
+## Fix
+- Updated controller and service to use DTO consistently
+- Fixed imports
+- Ensured proper conversion between DTO and Entity
+
+## Learnings
+- Difference between DTO and Entity
+- Importance of data abstraction and decoupling
+- DTO → Entity → DTO flow
+- Each layer must use consistent data types
+
+## Next
+- Replace Map with proper response wrapper class

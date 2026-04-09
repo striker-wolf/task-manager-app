@@ -6,6 +6,10 @@ import com.chirag.taskmanager.exception.ResourceNotFoundException;
 import com.chirag.taskmanager.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import com.chirag.taskmanager.dto.UserRequestDTO;
+import com.chirag.taskmanager.dto.UserResponseDTO;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,18 +21,41 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public UserResponseDTO createUser(UserRequestDTO dto) {
+
+        // DTO → Entity
+        User user = new User();
+        user.setName(dto.getName());
+        user.setEmail(dto.getEmail());
+
+        // Save to DB
+        User savedUser = userRepository.save(user);
+
+        // Entity → DTO
+        UserResponseDTO response = new UserResponseDTO();
+        response.setId(savedUser.getId());
+        response.setName(savedUser.getName());
+        response.setEmail(savedUser.getEmail());
+
+        return response;
     }
 
-    public User updateUser(Long id, User updatedUser) {
+    public UserResponseDTO updateUser(Long id, UserRequestDTO dto) {
+
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
 
-        user.setName(updatedUser.getName());
-        user.setEmail(updatedUser.getEmail());
+        user.setName(dto.getName());
+        user.setEmail(dto.getEmail());
 
-        return userRepository.save(user);
+        User updatedUser = userRepository.save(user);
+
+        UserResponseDTO response = new UserResponseDTO();
+        response.setId(updatedUser.getId());
+        response.setName(updatedUser.getName());
+        response.setEmail(updatedUser.getEmail());
+
+        return response;
     }
 
     public void deleteUser(Long id) {
@@ -39,13 +66,34 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserResponseDTO> getAllUsers() {
+
+        List<User> users = userRepository.findAll();
+        List<UserResponseDTO> responseList = new ArrayList<>();
+
+        for (User user : users) {
+            UserResponseDTO dto = new UserResponseDTO();
+            dto.setId(user.getId());
+            dto.setName(user.getName());
+            dto.setEmail(user.getEmail());
+
+            responseList.add(dto);
+        }
+
+        return responseList;
     }
 
-    public User getUserById(Long id) {
-        return userRepository.findById(id)
+    public UserResponseDTO getUserById(Long id) {
+
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+
+        UserResponseDTO dto = new UserResponseDTO();
+        dto.setId(user.getId());
+        dto.setName(user.getName());
+        dto.setEmail(user.getEmail());
+
+        return dto;
     }
 
 

@@ -50,3 +50,12 @@
 
 - Used HTTP status codes properly (200, 201, 400, 404)
   Reason: Correct communication between backend and client
+
+
+
+
+- Introduced DTO layer
+  Reason: Avoid exposing entity directly and improve flexibility, security, and scalability
+
+- Separated input and output DTO
+  Reason: Control incoming and outgoing data independently  

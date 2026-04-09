@@ -1,5 +1,8 @@
 package com.chirag.taskmanager.controller;
 
+import com.chirag.taskmanager.dto.UserRequestDTO;
+import com.chirag.taskmanager.dto.UserResponseDTO;
+
 import com.chirag.taskmanager.entity.User;
 import com.chirag.taskmanager.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -21,15 +24,15 @@ public class UserController {
     }
 
     @PostMapping
-    public Map<String, Object> createUser(@Valid @RequestBody User user) {
+    public Map<String, Object> createUser(@Valid @RequestBody UserRequestDTO dto) {
 
-        User savedUser = userService.createUser(user);
+        UserResponseDTO user = userService.createUser(dto);
 
         Map<String, Object> response = new HashMap<>();
         response.put("timestamp", LocalDateTime.now());
         response.put("status", 201);
         response.put("message", "User created successfully");
-        response.put("data", savedUser);
+        response.put("data", user);
 
         return response;
     }
@@ -37,7 +40,7 @@ public class UserController {
     @GetMapping
     public Map<String, Object> getAllUsers() {
 
-        List<User> users = userService.getAllUsers();
+        List<UserResponseDTO> users = userService.getAllUsers();
 
         Map<String, Object> response = new HashMap<>();
         response.put("timestamp", LocalDateTime.now());
@@ -51,7 +54,7 @@ public class UserController {
     @GetMapping("/{id}")
     public Map<String, Object> getUserById(@PathVariable Long id) {
 
-        User user = userService.getUserById(id);
+        UserResponseDTO user = userService.getUserById(id);
 
         Map<String, Object> response = new HashMap<>();
         response.put("timestamp", LocalDateTime.now());
@@ -63,15 +66,15 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public Map<String, Object> updateUser(@PathVariable Long id, @Valid @RequestBody User user) {
+    public Map<String, Object> updateUser(@PathVariable Long id, @Valid @RequestBody UserRequestDTO dto) {
 
-        User updatedUser = userService.updateUser(id, user);
+        UserResponseDTO user = userService.updateUser(id, dto);
 
         Map<String, Object> response = new HashMap<>();
         response.put("timestamp", LocalDateTime.now());
         response.put("status", 200);
         response.put("message", "User updated successfully");
-        response.put("data", updatedUser);
+        response.put("data", user);
 
         return response;
     }
