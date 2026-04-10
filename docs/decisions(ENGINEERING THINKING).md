@@ -59,3 +59,24 @@
 
 - Separated input and output DTO
   Reason: Control incoming and outgoing data independently  
+
+
+
+
+- Introduced ApiResponse<T> wrapper
+  Reason: Provide type safety, consistency, and reusable response structure
+
+- Replaced Map with generic response class
+  Reason: Avoid unstructured responses and improve maintainability
+
+
+
+
+- Introduced mapper layer
+  Reason: Separate data conversion from business logic and improve maintainability
+
+- Used static methods in mapper
+  Reason: Utility-style usage without needing object instantiation
+
+- Used stream API for list mapping
+  Reason: Cleaner and more readable transformation logic

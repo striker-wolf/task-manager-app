@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.chirag.taskmanager.dto.UserRequestDTO;
 import com.chirag.taskmanager.dto.UserResponseDTO;
 
+import com.chirag.taskmanager.mapper.UserMapper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,39 +25,22 @@ public class UserService {
 
     public UserResponseDTO createUser(UserRequestDTO dto) {
 
-        // DTO → Entity
-        User user = new User();
-        user.setName(dto.getName());
-        user.setEmail(dto.getEmail());
+        User user = UserMapper.toEntity(dto);
 
-        // Save to DB
         User savedUser = userRepository.save(user);
 
-        // Entity → DTO
-        UserResponseDTO response = new UserResponseDTO();
-        response.setId(savedUser.getId());
-        response.setName(savedUser.getName());
-        response.setEmail(savedUser.getEmail());
-
-        return response;
+        return UserMapper.toDTO(savedUser);
     }
 
     public UserResponseDTO updateUser(Long id, UserRequestDTO dto) {
 
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         user.setName(dto.getName());
         user.setEmail(dto.getEmail());
 
-        User updatedUser = userRepository.save(user);
-
-        UserResponseDTO response = new UserResponseDTO();
-        response.setId(updatedUser.getId());
-        response.setName(updatedUser.getName());
-        response.setEmail(updatedUser.getEmail());
-
-        return response;
+        return UserMapper.toDTO(userRepository.save(user));
     }
 
     public void deleteUser(Long id) {
@@ -67,20 +52,10 @@ public class UserService {
     }
 
     public List<UserResponseDTO> getAllUsers() {
-
-        List<User> users = userRepository.findAll();
-        List<UserResponseDTO> responseList = new ArrayList<>();
-
-        for (User user : users) {
-            UserResponseDTO dto = new UserResponseDTO();
-            dto.setId(user.getId());
-            dto.setName(user.getName());
-            dto.setEmail(user.getEmail());
-
-            responseList.add(dto);
-        }
-
-        return responseList;
+        return userRepository.findAll()
+                .stream()
+                .map(UserMapper::toDTO)
+                .toList();
     }
 
     public UserResponseDTO getUserById(Long id) {

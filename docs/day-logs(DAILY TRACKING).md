@@ -201,3 +201,34 @@
 
 ## Next
 - Introduce Mapper layer to remove manual DTO conversion
+
+
+
+
+
+# Day 8 — Mapper Layer (Clean Architecture)
+
+## What I Did
+- Created UserMapper class for DTO ↔ Entity conversion
+- Moved conversion logic from service to mapper
+- Refactored service layer to use mapper methods
+- Used stream API for mapping list of users
+
+## Problems
+- Initial confusion about need for separate mapper layer
+- Understanding static methods usage
+- Adapting to stream-based mapping
+
+## Fix
+- Separated responsibilities clearly (service vs mapper)
+- Used static methods for utility-style mapping
+- Applied .stream().map() for cleaner list conversion
+
+## Learnings
+- Importance of separation of concerns
+- Cleaner service layer improves readability and maintainability
+- Reusable mapping logic reduces duplication
+- Functional style (stream API) for cleaner transformations
+
+## Next
+- Introduce builder pattern for cleaner object creation
