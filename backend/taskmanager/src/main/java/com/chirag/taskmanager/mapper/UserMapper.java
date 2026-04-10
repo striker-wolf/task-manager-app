@@ -7,17 +7,17 @@ import com.chirag.taskmanager.entity.User;
 public class UserMapper {
 
     public static User toEntity(UserRequestDTO dto) {
-        User user = new User();
-        user.setName(dto.getName());
-        user.setEmail(dto.getEmail());
-        return user;
+        return User.builder()
+                .name(dto.getName())
+                .email(dto.getEmail())
+                .build();
     }
 
     public static UserResponseDTO toDTO(User user) {
-        UserResponseDTO dto = new UserResponseDTO();
-        dto.setId(user.getId());
-        dto.setName(user.getName());
-        dto.setEmail(user.getEmail());
-        return dto;
+        return UserResponseDTO.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .email(user.getEmail())
+                .build();
     }
 }

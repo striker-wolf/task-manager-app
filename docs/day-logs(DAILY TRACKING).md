@@ -232,3 +232,34 @@
 
 ## Next
 - Introduce builder pattern for cleaner object creation
+
+
+
+
+
+# Day 9 — Builder Pattern (Clean Object Creation)
+
+## What I Did
+- Introduced Builder pattern using Lombok (@Builder)
+- Applied builder to Entity and DTO classes
+- Refactored mapper to use builder instead of setters
+- Improved object creation readability and structure
+
+## Problems
+- Lombok builder not working initially
+- Confusion with Lombok annotations and imports
+- Mixed manual getters/setters with Lombok
+
+## Fix
+- Enabled annotation processing and corrected Lombok imports
+- Removed manual getters/setters and relied on @Data
+- Properly applied @Builder across classes
+
+## Learnings
+- Builder pattern enables clean and controlled object creation
+- Fluent API improves readability and reduces errors
+- Avoid mixing Lombok with manual code
+- Builder is better than setters for scalable objects
+
+## Next
+- Introduce logging for debugging and production readiness

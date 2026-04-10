@@ -2,7 +2,13 @@ package com.chirag.taskmanager.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import lombok.*;
+import lombok.Builder;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class UserRequestDTO {
 
     @NotBlank
@@ -12,20 +18,4 @@ public class UserRequestDTO {
     @NotBlank
     private String email;
 
-    // getters & setters
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

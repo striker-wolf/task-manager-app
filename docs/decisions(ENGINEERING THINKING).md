@@ -80,3 +80,12 @@
 
 - Used stream API for list mapping
   Reason: Cleaner and more readable transformation logic
+
+
+
+
+- Used Builder pattern for object creation
+  Reason: Improve readability, avoid partial object states, and scale better with more fields
+
+- Used Lombok annotations (@Builder, @Data)
+  Reason: Reduce boilerplate and simplify code  
