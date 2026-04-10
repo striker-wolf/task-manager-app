@@ -89,3 +89,12 @@
 
 - Used Lombok annotations (@Builder, @Data)
   Reason: Reduce boilerplate and simplify code  
+
+
+
+
+- Introduced structured logging using SLF4J
+  Reason: Improve debugging, monitoring, and production readiness
+
+- Used parameterized logging ({})
+  Reason: Better performance and standard logging practice

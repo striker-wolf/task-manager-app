@@ -7,7 +7,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -15,6 +17,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, Object> handleValidationErrors(MethodArgumentNotValidException ex) {
 
+        log.error("Exception occurred: {}", ex.getMessage());
         Map<String, Object> errors = new HashMap<>();
 
         ex.getBindingResult().getFieldErrors().forEach(error -> {

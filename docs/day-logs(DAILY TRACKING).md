@@ -263,3 +263,31 @@
 
 ## Next
 - Introduce logging for debugging and production readiness
+
+
+
+
+
+# Day 10 — Logging + Debugging
+
+## What I Did
+- Added logging using @Slf4j in service and exception handler
+- Logged key backend operations (create, fetch, update, delete)
+- Implemented error logging for failure scenarios
+
+## Problems
+- Confusion about where to place logs
+- Initial habit of using System.out.println
+
+## Fix
+- Used structured logging with log.info() and log.error()
+- Followed proper logging format using {} placeholders
+
+## Learnings
+- Logging improves observability and debugging
+- Difference between log levels (info, error, debug)
+- Structured logging is efficient and standard practice
+- Debugging mindset shifted from guessing to reading logs
+
+## Next
+- Decide next phase: Frontend integration or advanced backend
