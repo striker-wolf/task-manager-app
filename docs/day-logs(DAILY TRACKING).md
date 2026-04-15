@@ -291,3 +291,35 @@
 
 ## Next
 - Decide next phase: Frontend integration or advanced backend
+
+
+
+
+
+# Day 11 — Frontend Integration (React + API)
+
+## What I Did
+- Created React app using create-react-app
+- Cleaned default boilerplate files
+- Built UserList component to fetch and display users
+- Connected frontend with backend GET /users API
+- Rendered dynamic data using React state and useEffect
+
+## Problems
+- CORS issue while calling backend API
+- Confusion with nested response (data.data)
+- No error handling initially
+
+## Fix
+- Enabled CORS using @CrossOrigin in backend
+- Accessed correct data using ApiResponse structure (data.data)
+- Added basic error handling in fetch
+
+## Learnings
+- Full frontend-backend data flow
+- React state management using useState
+- Side effects handling using useEffect
+- Importance of API response structure
+
+## Next
+- Build form to create user (POST API integration)

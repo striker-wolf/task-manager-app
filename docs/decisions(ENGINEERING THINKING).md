@@ -98,3 +98,15 @@
 
 - Used parameterized logging ({})
   Reason: Better performance and standard logging practice
+
+
+
+
+- Used React for frontend integration
+  Reason: To visualize backend APIs and build full-stack understanding
+
+- Consumed ApiResponse<T> in frontend
+  Reason: Maintain consistency with backend response structure
+
+- Enabled CORS in backend
+  Reason: Allow frontend (localhost:3000) to access backend APIs  
