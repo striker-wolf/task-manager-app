@@ -323,3 +323,36 @@
 
 ## Next
 - Build form to create user (POST API integration)
+
+
+
+
+
+# Day 12 — Create User Form + POST API Integration
+
+## What I Did
+- Built UserForm component using controlled inputs
+- Implemented POST API call to create users
+- Connected frontend form with Spring Boot backend
+- Added dynamic UI refresh after successful user creation
+- Implemented parent-child communication using props
+
+## Problems
+- Understanding async form submission flow
+- Confusion around refresh-based UI updates
+- Missing frontend validation initially
+
+## Fix
+- Used async/await for API handling
+- Triggered UI refresh using shared parent state
+- Added basic validation and response status handling
+
+## Learnings
+- Controlled components using useState
+- Form event handling using preventDefault()
+- Parent-child communication through props
+- State-driven UI rendering and refresh flow
+- Frontend-backend interaction lifecycle
+
+## Next
+- Implement delete user functionality from frontend

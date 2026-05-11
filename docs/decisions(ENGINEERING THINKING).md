@@ -110,3 +110,15 @@
 
 - Enabled CORS in backend
   Reason: Allow frontend (localhost:3000) to access backend APIs  
+
+
+
+
+- Used controlled components for form handling
+  Reason: Keep React in control of input state and behavior
+
+- Used parent-managed refresh state
+  Reason: Coordinate updates between sibling components after user creation
+
+- Used async/await for API requests
+  Reason: Improve readability and handle asynchronous operations cleanly

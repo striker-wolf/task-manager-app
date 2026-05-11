@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from "react";
 
-function UserList() {
+function UserList({ refresh }) {
+
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8081/users")
-      .then(res => res.json())
-      .then(data => {
-        setUsers(data.data); // because ApiResponse<T>
-      });
-  }, []);
+    fetchUsers();
+  }, [refresh]);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch("http://localhost:8081/users");
+      const data = await response.json();
+      setUsers(data.data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
 
   return (
     <div>
       <h2>Users</h2>
+
       {users.map(user => (
         <div key={user.id}>
           <p>{user.name} - {user.email}</p>
