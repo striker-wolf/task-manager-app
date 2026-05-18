@@ -122,3 +122,15 @@
 
 - Used async/await for API requests
   Reason: Improve readability and handle asynchronous operations cleanly
+
+
+
+
+  - Refetched users after deletion
+  Reason: Ensure frontend stays synchronized with backend state
+
+- Added confirmation dialog before delete
+  Reason: Prevent accidental destructive actions
+
+- Used dynamic ID-based DELETE endpoint
+  Reason: Perform actions on specific resources

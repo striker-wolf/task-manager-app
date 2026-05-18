@@ -356,3 +356,35 @@
 
 ## Next
 - Implement delete user functionality from frontend
+
+
+
+
+
+# Day 13 — Delete User Flow (Frontend + Backend Sync)
+
+## What I Did
+- Added Delete button for each user
+- Integrated DELETE API call with backend
+- Implemented confirmation dialog before deletion
+- Refreshed user list dynamically after delete
+- Used dynamic user ID-based API requests
+
+## Problems
+- Understanding frontend-backend synchronization after delete
+- Confusion about dynamic URLs and action binding
+- Concern about keeping UI state consistent
+
+## Fix
+- Used dynamic route with user ID for DELETE requests
+- Triggered fetchUsers() after deletion
+- Added confirmation flow using window.confirm()
+
+## Learnings
+- Event-driven frontend interaction
+- Dynamic API requests using IDs
+- Importance of backend and frontend state synchronization
+- UI updates do not happen automatically after backend changes
+
+## Next
+- Implement update/edit user functionality
