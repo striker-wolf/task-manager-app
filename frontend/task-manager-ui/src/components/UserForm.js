@@ -1,12 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-function UserForm({ onUserCreated }) {
+function UserForm({
+  onUserCreated,
+  editingUser,
+  setEditingUser
+}) {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
+  // prefill form when editing
+  useEffect(() => {
+
+    if (editingUser) {
+      setName(editingUser.name);
+      setEmail(editingUser.email);
+    }
+
+  }, [editingUser]);
+
   const handleSubmit = async (e) => {
+
     e.preventDefault();
+
+    if (!name || !email) {
+      alert("All fields are required");
+      return;
+    }
 
     const userData = {
       name,
@@ -14,31 +34,67 @@ function UserForm({ onUserCreated }) {
     };
 
     try {
-      const response = await fetch("http://localhost:8081/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(userData)
-      });
+
+      let response;
+
+      // UPDATE USER
+      if (editingUser) {
+
+        response = await fetch(
+          `http://localhost:8081/users/${editingUser.id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userData)
+          }
+        );
+
+      } else {
+
+        // CREATE USER
+        response = await fetch(
+          "http://localhost:8081/users",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userData)
+          }
+        );
+      }
+
+      if (!response.ok) {
+        throw new Error("Operation failed");
+      }
 
       const data = await response.json();
 
       console.log(data);
 
-      onUserCreated(); // refresh users
+      // refresh list
+      onUserCreated();
 
+      // clear form
       setName("");
       setEmail("");
 
+      // reset editing state
+      setEditingUser(null);
+
     } catch (error) {
-      console.error("Error creating user:", error);
+      console.error("Error:", error);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Create User</h2>
+
+      <h2>
+        {editingUser ? "Edit User" : "Create User"}
+      </h2>
 
       <input
         type="text"
@@ -54,7 +110,10 @@ function UserForm({ onUserCreated }) {
         onChange={(e) => setEmail(e.target.value)}
       />
 
-      <button type="submit">Create</button>
+      <button type="submit">
+        {editingUser ? "Update User" : "Create User"}
+      </button>
+
     </form>
   );
 }

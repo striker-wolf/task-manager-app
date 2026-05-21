@@ -134,3 +134,15 @@
 
 - Used dynamic ID-based DELETE endpoint
   Reason: Perform actions on specific resources
+
+
+
+
+- Reused single form for Create and Edit operations
+  Reason: Reduce duplication and centralize form logic
+
+- Lifted editing state to App.js
+  Reason: Allow coordination between UserList and UserForm
+
+- Used conditional API logic (POST vs PUT)
+  Reason: Support multiple behaviors using shared form state

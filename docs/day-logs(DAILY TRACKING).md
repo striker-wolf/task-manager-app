@@ -388,3 +388,38 @@
 
 ## Next
 - Implement update/edit user functionality
+
+
+
+
+
+# Day 14 — Edit / Update User Flow
+
+## What I Did
+- Added Edit button for each user
+- Lifted editing state to App.js
+- Implemented reusable form for Create + Edit operations
+- Added pre-filled form behavior using useEffect
+- Integrated PUT API for updating users
+- Dynamically switched form mode and button text
+- Reset form state after successful update
+
+## Problems
+- Understanding shared state between components
+- Confusion around useEffect dependency behavior
+- Managing create vs update flow in same form
+
+## Fix
+- Lifted editingUser state to parent component
+- Used conditional logic for POST vs PUT requests
+- Used useEffect to synchronize form fields with editing state
+
+## Learnings
+- Lifting state up in React
+- Parent-child component coordination
+- Reusable form architecture
+- Conditional rendering and dynamic form behavior
+- React lifecycle through state and useEffect
+
+## Next
+- Add loading states and frontend feedback system
