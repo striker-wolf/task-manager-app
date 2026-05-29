@@ -423,3 +423,37 @@
 
 ## Next
 - Add loading states and frontend feedback system
+
+
+
+
+
+# Day 15 — UX + Feedback System
+
+## What I Did
+- Added loading state management during API requests
+- Disabled submit button while requests are in progress
+- Added success messages for create and update operations
+- Added error messages for failed requests
+- Improved API error handling using backend response messages
+- Implemented request lifecycle management using try/catch/finally
+
+## Problems
+- Understanding request lifecycle flow
+- Managing multiple UI states (loading, success, error)
+- Ensuring loading state resets on both success and failure
+
+## Fix
+- Used separate state variables for loading, success, and error
+- Implemented finally block for cleanup
+- Added proper response status checking before processing data
+
+## Learnings
+- Request lifecycle management
+- Importance of user feedback during operations
+- Preventing duplicate requests using disabled buttons
+- Difference between system success and user-visible success
+- Frontend error handling patterns
+
+## Next
+- Extract API calls into separate service layer

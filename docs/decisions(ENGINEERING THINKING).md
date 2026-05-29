@@ -146,3 +146,18 @@
 
 - Used conditional API logic (POST vs PUT)
   Reason: Support multiple behaviors using shared form state
+
+
+
+
+- Added loading state during API requests
+  Reason: Improve user experience and prevent duplicate actions
+
+- Disabled submit button while processing
+  Reason: Avoid multiple submissions and inconsistent state
+
+- Added success and error feedback messages
+  Reason: Keep users informed about operation outcomes
+
+- Used try/catch/finally for request handling
+  Reason: Ensure proper cleanup regardless of request result  

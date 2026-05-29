@@ -9,6 +9,10 @@ function UserForm({
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
   // prefill form when editing
   useEffect(() => {
 
@@ -24,9 +28,16 @@ function UserForm({
     e.preventDefault();
 
     if (!name || !email) {
-      alert("All fields are required");
+
+      setMessage("");
+      setError("All fields are required");
+
       return;
     }
+
+    setLoading(true);
+    setMessage("");
+    setError("");
 
     const userData = {
       name,
@@ -36,6 +47,10 @@ function UserForm({
     try {
 
       let response;
+
+      await new Promise(
+        resolve => setTimeout(resolve, 3000)
+      );
 
       // UPDATE USER
       if (editingUser) {
@@ -67,12 +82,23 @@ function UserForm({
       }
 
       if (!response.ok) {
-        throw new Error("Operation failed");
+
+        const errData = await response.json();
+
+        throw new Error(
+          errData.message || "Operation failed"
+        );
       }
 
       const data = await response.json();
 
       console.log(data);
+
+      setMessage(
+        editingUser
+          ? "User updated successfully"
+          : "User created successfully"
+      );
 
       // refresh list
       onUserCreated();
@@ -85,7 +111,15 @@ function UserForm({
       setEditingUser(null);
 
     } catch (error) {
+
       console.error("Error:", error);
+
+      setError(error.message);
+
+    } finally {
+
+      setLoading(false);
+
     }
   };
 
@@ -110,9 +144,30 @@ function UserForm({
         onChange={(e) => setEmail(e.target.value)}
       />
 
-      <button type="submit">
-        {editingUser ? "Update User" : "Create User"}
+      <button
+        type="submit"
+        disabled={loading}
+      >
+
+        {loading
+          ? "Processing..."
+          : editingUser
+            ? "Update User"
+            : "Create User"}
+
       </button>
+
+      {message && (
+        <p style={{ color: "green" }}>
+          {message}
+        </p>
+      )}
+
+      {error && (
+        <p style={{ color: "red" }}>
+          {error}
+        </p>
+      )}
 
     </form>
   );
