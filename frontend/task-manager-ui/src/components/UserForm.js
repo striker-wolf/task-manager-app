@@ -1,4 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState
+} from "react";
+
+import {
+  createUser,
+  updateUser
+} from "../services/userService";
 
 function UserForm({
   onUserCreated,
@@ -13,12 +21,13 @@ function UserForm({
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
-  // prefill form when editing
   useEffect(() => {
 
     if (editingUser) {
+
       setName(editingUser.name);
       setEmail(editingUser.email);
+
     }
 
   }, [editingUser]);
@@ -46,51 +55,24 @@ function UserForm({
 
     try {
 
-      let response;
-
       await new Promise(
         resolve => setTimeout(resolve, 3000)
       );
 
-      // UPDATE USER
+      let data;
+
       if (editingUser) {
 
-        response = await fetch(
-          `http://localhost:8081/users/${editingUser.id}`,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(userData)
-          }
+        data = await updateUser(
+          editingUser.id,
+          userData
         );
 
       } else {
 
-        // CREATE USER
-        response = await fetch(
-          "http://localhost:8081/users",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(userData)
-          }
-        );
+        data = await createUser(userData);
+
       }
-
-      if (!response.ok) {
-
-        const errData = await response.json();
-
-        throw new Error(
-          errData.message || "Operation failed"
-        );
-      }
-
-      const data = await response.json();
 
       console.log(data);
 
@@ -100,14 +82,11 @@ function UserForm({
           : "User created successfully"
       );
 
-      // refresh list
       onUserCreated();
 
-      // clear form
       setName("");
       setEmail("");
 
-      // reset editing state
       setEditingUser(null);
 
     } catch (error) {
@@ -127,21 +106,27 @@ function UserForm({
     <form onSubmit={handleSubmit}>
 
       <h2>
-        {editingUser ? "Edit User" : "Create User"}
+        {editingUser
+          ? "Edit User"
+          : "Create User"}
       </h2>
 
       <input
         type="text"
         placeholder="Enter name"
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e) =>
+          setName(e.target.value)
+        }
       />
 
       <input
         type="email"
         placeholder="Enter email"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) =>
+          setEmail(e.target.value)
+        }
       />
 
       <button

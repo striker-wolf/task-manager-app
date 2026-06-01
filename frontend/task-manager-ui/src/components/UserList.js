@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
 
+import {
+  getUsers,
+  deleteUser
+} from "../services/userService";
+
 function UserList({ refresh, onEditUser }) {
 
   const [users, setUsers] = useState([]);
@@ -12,22 +17,21 @@ function UserList({ refresh, onEditUser }) {
 
     try {
 
-      const response = await fetch(
-        "http://localhost:8081/users"
-      );
-
-      const data = await response.json();
+      const data = await getUsers();
 
       setUsers(data.data);
 
     } catch (error) {
 
-      console.error("Error fetching users:", error);
+      console.error(
+        "Error fetching users:",
+        error
+      );
 
     }
   };
 
-  const deleteUser = async (id) => {
+  const handleDeleteUser = async (id) => {
 
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this user?"
@@ -37,23 +41,16 @@ function UserList({ refresh, onEditUser }) {
 
     try {
 
-      const response = await fetch(
-        `http://localhost:8081/users/${id}`,
-        {
-          method: "DELETE"
-        }
-      );
+      await deleteUser(id);
 
-      if (!response.ok) {
-        throw new Error("Failed to delete user");
-      }
-
-      // refresh users after delete
       fetchUsers();
 
     } catch (error) {
 
-      console.error("Error deleting user:", error);
+      console.error(
+        "Error deleting user:",
+        error
+      );
 
     }
   };
@@ -71,11 +68,17 @@ function UserList({ refresh, onEditUser }) {
             {user.name} - {user.email}
           </p>
 
-          <button onClick={() => onEditUser(user)}>
+          <button
+            onClick={() => onEditUser(user)}
+          >
             Edit
           </button>
 
-          <button onClick={() => deleteUser(user.id)}>
+          <button
+            onClick={() =>
+              handleDeleteUser(user.id)
+            }
+          >
             Delete
           </button>
 
