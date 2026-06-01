@@ -161,3 +161,15 @@
 
 - Used try/catch/finally for request handling
   Reason: Ensure proper cleanup regardless of request result  
+
+
+
+
+- Introduced frontend service layer
+  Reason: Separate API communication from UI logic
+
+- Centralized API URL configuration
+  Reason: Simplify maintenance and reduce duplication
+
+- Created reusable CRUD service methods
+  Reason: Promote code reuse and cleaner components

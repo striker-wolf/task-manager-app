@@ -457,3 +457,35 @@
 
 ## Next
 - Extract API calls into separate service layer
+
+
+
+
+
+# Day 16 — API Service Layer
+
+## What I Did
+- Created dedicated service layer (userService.js)
+- Moved all API communication out of React components
+- Refactored UserForm to use service methods
+- Refactored UserList to use service methods
+- Centralized API URLs and request handling
+
+## Problems
+- Understanding why fetch logic should be separated
+- Refactoring existing components without breaking functionality
+- Adjusting imports and async calls after extraction
+
+## Fix
+- Created reusable service functions (getUsers, createUser, updateUser, deleteUser)
+- Replaced direct fetch calls with service layer methods
+- Centralized API configuration using BASE_URL
+
+## Learnings
+- Separation of concerns in frontend architecture
+- Difference between UI logic and API communication logic
+- Reusability through service abstraction
+- Easier maintenance through centralized API management
+
+## Next
+- Create custom React hook (useUsers) for reusable state management
